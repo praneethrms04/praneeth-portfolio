@@ -1,0 +1,27 @@
+version: "3.8"
+
+include:
+  - infra/docker/docker-compose.yaml
+
+services:
+  auth-service:
+    build:
+      context: ./apps/auth-service
+      dockerfile: Dockerfile
+    container_name: portfolio-auth
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      AUTH_SERVICE_PORT: 3001
+      JWT_SECRET: mysupersecretkey123
+      JWT_EXPIRES_IN: 7d
+      POSTGRES_URL: postgresql://praneeth:praneeth123@postgres:5432/portfolio
+    depends_on:
+      - postgres
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
