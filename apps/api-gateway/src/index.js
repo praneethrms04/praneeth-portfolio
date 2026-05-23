@@ -1,3 +1,4 @@
+const http = require("http");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -5,6 +6,7 @@ require("dotenv").config();
 const logger = require("./middleware/logger");
 const { limiter, authLimiter } = require("./config/rateLimit");
 const { authProxy, contentProxy, aiProxy } = require("./routes/proxy");
+const { initSocket } = require("./socket");
 
 const app = express();
 const PORT = process.env.GATEWAY_PORT || 8000;
@@ -37,8 +39,12 @@ app.use((req, res) => {
   res.status(404).json({ error: `Route ${req.originalUrl} not found` });
 });
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+initSocket(server);
+
+server.listen(PORT, () => {
   console.log(`API Gateway running on port ${PORT}`);
+  console.log(`Socket.io listening on ws://localhost:${PORT}`);
   console.log(`Auth service → ${process.env.AUTH_SERVICE_URL}`);
   console.log(`Content service → ${process.env.CONTENT_SERVICE_URL}`);
   console.log(`AI service → ${process.env.AI_SERVICE_URL}`);

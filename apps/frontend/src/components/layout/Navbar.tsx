@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth.store";
+import VisitorCounter from "@/components/realtime/VisitorCounter";
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuthStore();
@@ -41,6 +42,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
+          <VisitorCounter />
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
               <span className="text-gray-400 text-sm">Hi, {user?.name}</span>
