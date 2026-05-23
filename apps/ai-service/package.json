@@ -1,0 +1,11 @@
+{
+  "name": "@portfolio/ai-service",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": ".\\.venv\\Scripts\\python.exe -m uvicorn src.index:app --reload --host 0.0.0.0 --port 3003",
+    "start": ".\\.venv\\Scripts\\python.exe -m uvicorn src.index:app --host 0.0.0.0 --port 3003",
+    "build": "echo 'ai-service: no JS build step'",
+    "test": ".\\.venv\\Scripts\\python.exe -m pytest -q || echo 'no tests yet'"
+  }
+}
