@@ -17,4 +17,4 @@ USER appuser
 
 EXPOSE 3003
 
-CMD uvicorn src.index:app --host 0.0.0.0 --port ${PORT:-3003}
+CMD uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-3003}
