@@ -4,12 +4,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/auth-service/**'
-      - '.github/workflows/auth-service.yaml'
+      - "apps/auth-service/**"
+      - ".github/workflows/auth-service.yaml"
   pull_request:
     branches: [main]
     paths:
-      - 'apps/auth-service/**'
+      - "apps/auth-service/**"
 
 jobs:
   test:
@@ -38,8 +38,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         working-directory: apps/auth-service

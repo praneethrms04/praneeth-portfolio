@@ -1,6 +1,6 @@
 name: Content Service CI/CD
 
-on:
+"on":
   push:
     branches: [main]
     paths:
