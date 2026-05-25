@@ -11,13 +11,16 @@ const PORT = process.env.AUTH_SERVICE_PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-app.get("/health", (req, res) => {
+const healthHandler = (req, res) => {
   res.json({
     status: "ok",
     service: "auth-service",
     timestamp: new Date().toISOString(),
   });
-});
+};
+
+app.get("/health", healthHandler);
+app.get("/auth/health", healthHandler);
 
 app.use("/auth", authRoutes);
 

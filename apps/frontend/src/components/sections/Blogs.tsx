@@ -51,7 +51,7 @@ export default function Blogs() {
             {blogs.slice(0, 6).map((blog) => (
               <Link
                 key={blog._id}
-                href={`/blogs/${blog._id}`}
+                href={`/blogs/${blog.slug ?? blog._id}`}
                 className="group p-6 rounded-xl border border-white/10 bg-white/5 hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300 flex flex-col"
               >
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -79,6 +79,17 @@ export default function Blogs() {
                 </div>
               </Link>
             ))}
+          </div>
+        )}
+
+        {!loading && blogs.length > 0 && (
+          <div className="mt-12 text-center">
+            <Link
+              href="/blogs"
+              className="inline-block px-6 py-2.5 rounded-lg border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+            >
+              View all blogs →
+            </Link>
           </div>
         )}
       </div>

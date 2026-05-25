@@ -19,10 +19,19 @@ api.interceptors.request.use((config) => {
 // Handle auth errors globally
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/login";
+      const url: string = error.config?.url ?? "";
+      const isAuthRoute = url.includes("/auth/login") || url.includes("/auth/register");
+      if (!isAuthRoute) {
+        localStorage.removeItem("token");
+        if (typeof window !== "undefined") {
+          const { useAuthStore } = await import("@/store/auth.store");
+          const { useAuthModalStore } = await import("@/store/authModal.store");
+          useAuthStore.getState().logout();
+          useAuthModalStore.getState().openModal("login");
+        }
+      }
     }
     return Promise.reject(error);
   },

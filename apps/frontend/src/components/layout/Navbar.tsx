@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth.store";
+import { useAuthModalStore } from "@/store/authModal.store";
 import VisitorCounter from "@/components/realtime/VisitorCounter";
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuthStore();
+  const openAuthModal = useAuthModalStore((s) => s.openModal);
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
@@ -28,7 +30,7 @@ export default function Navbar() {
             Projects
           </Link>
           <Link
-            href="/#blogs"
+            href="/blogs"
             className="text-gray-400 hover:text-white transition-colors text-sm"
           >
             Blog
@@ -45,7 +47,15 @@ export default function Navbar() {
           <VisitorCounter />
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
-              <span className="text-gray-400 text-sm">Hi, {user?.name}</span>
+              <Link
+                href="/admin/blogs"
+                className="hidden sm:inline text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                Admin
+              </Link>
+              <span className="hidden md:inline text-gray-400 text-sm">
+                Hi, {user?.name}
+              </span>
               <button
                 onClick={logout}
                 className="text-sm px-4 py-2 rounded-lg border border-white/20 text-white hover:bg-white/10 transition-colors"
@@ -54,12 +64,12 @@ export default function Navbar() {
               </button>
             </div>
           ) : (
-            <Link
-              href="/login"
+            <button
+              onClick={() => openAuthModal("login")}
               className="text-sm px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors"
             >
               Login
-            </Link>
+            </button>
           )}
         </div>
       </div>

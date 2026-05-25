@@ -24,3 +24,37 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Blog reader / preview prose styles */
+.prose-blog {
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.prose-blog p {
+  margin-bottom: 1.1em;
+}
+.prose-blog h1,
+.prose-blog h2,
+.prose-blog h3,
+.prose-blog h4 {
+  scroll-margin-top: 6rem;
+}
+.prose-blog a {
+  word-break: break-word;
+}
+.prose-blog pre {
+  margin: 1.25em 0;
+}
+.prose-blog blockquote {
+  margin: 1.25em 0;
+}
+.prose-blog ul,
+.prose-blog ol {
+  margin-bottom: 1.1em;
+}
+.prose-blog img {
+  max-width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 1.25em 0;
+}

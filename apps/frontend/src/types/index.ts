@@ -21,12 +21,21 @@ export interface Project {
 export interface Blog {
   _id: string;
   title: string;
+  slug: string;
   content: string;
   summary?: string;
   tags: string[];
+  coverImage?: string;
+  author?: {
+    name?: string;
+    email?: string;
+  };
+  readingTime?: number;
   published: boolean;
+  publishedAt?: string;
   views: number;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface AuthResponse {
